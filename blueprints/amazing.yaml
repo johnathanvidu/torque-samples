@@ -1,0 +1,36 @@
+spec_version: 2-preview
+description: description text
+
+inputs:
+  some-name:
+    type: string/numeric/boolean
+    display-style: normal/multiline
+    default: "abc"
+    description: "description"
+
+outputs:
+  some-name: 
+    value: .grains.app1.outputs.output_name
+    
+grains:
+  app1:
+    kind: terraform
+    spec:
+      source: 
+        store: on-borded-repo/registry-name
+        path: /app1/
+      host: compute-service-name
+      inputs:
+        - input_name: .inputs.some-name
+      ouputs:
+        - output-name
+        
+  app2:
+    kind: helm
+    depends-on: app1
+    spec:
+      source: 
+        path: https://github.com/example/app1/
+      host: compute-service-name
+      inputs:
+        - someInput: .grains.app1.outputs.output-name
