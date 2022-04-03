@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.referenceApplication.serviceName }}-service   
+  namespace: {{ .Values.tenant }}
+  labels:
+    app.kubernetes.io/name: "{{ .Values.tenant }}-service"
+    app.kubernetes.io/instance:  "{{ .Values.tenant }}"
+    app.kubernetes.io/version: "{{ .Values.version }}"
+    app.kubernetes.io/component: "{{ .Values.referenceApplication.serviceName }}" 
+    app.kubernetes.io/part-of: "{{ .Values.tenant }}"
+    app.kubernetes.io/managed-by: "helm"
+    app.kubernetes.io/created-by: "helm"
+  annotations:
+    konghq.com/plugins: api-key-auth
+spec:
+  type: {{ .Values.referenceApplication.serviceType }}
+  ports:
+    - port: {{ .Values.referenceApplication.servicePort }}
+      targetPort: {{ .Values.referenceApplication.containerPort }}
+  selector:
+    any-name: {{ .Values.tenant }}

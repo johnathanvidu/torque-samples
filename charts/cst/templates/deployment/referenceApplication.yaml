@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.referenceApplication.serviceName }}-deployment  
+  namespace: {{ .Values.tenant }} 
+  labels:
+    app.kubernetes.io/name: "{{ .Values.referenceApplication.serviceName }}-deployment"
+    app.kubernetes.io/instance:  "{{ .Values.tenant }}"
+    app.kubernetes.io/version: "{{ .Values.version }}"
+    app.kubernetes.io/component: "{{ .Values.referenceApplication.serviceName }}" 
+    app.kubernetes.io/part-of: "{{ .Values.tenant }}"
+    app.kubernetes.io/managed-by: "helm"
+    app.kubernetes.io/created-by: "helm"  
+spec:
+  replicas: {{ .Values.replicas }}
+  minReadySeconds: 45
+  selector:
+    matchLabels:
+      any-name: {{ .Values.tenant }} 
+  template:
+    metadata:
+      labels:
+        any-name: {{ .Values.tenant }} 
+    spec:
+      serviceAccountName: "{{ .Values.tenant }}-{{ .Values.referenceApplication.serviceName }}-sa"
+      containers:
+      - name: {{ .Values.tenant }}
+        image: {{ .Values.referenceApplication.image }}:{{ .Values.version }}
+        imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 500m
+            memory: 512Mi
+        ports:
+          - containerPort: {{ .Values.referenceApplication.containerPort }}
+        livenessProbe:
+          httpGet:
+            path: /liveness
+            port: {{ .Values.referenceApplication.containerPort }}          
+          initialDelaySeconds: 60   #seconds to wait before starting checks
+          periodSeconds: 60         #seconds to wait between checks
+          timeoutSeconds: 5         #seconds to wait for a response
+          failureThreshold: 10      #number of consecutive failures required to restart the pod      
+      nodeSelector:
+        kubernetes.io/os: linux
+        eks.amazonaws.com/capacityType: SPOT
+        

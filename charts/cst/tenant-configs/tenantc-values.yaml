@@ -1,0 +1,18 @@
+# tenantc values for c3 "simple" reference application.
+
+# Release-wide Values
+replicas: "1"
+version: "#{TAG}#"
+account: "#{AWS_ACCOUNT_ID}#"        
+region: "#{AWS_REGION}#"             
+stack: "#{STACK_NAME}#"             
+cluster: "#{EKS_CLUSTER_NAME}#"     
+tenant: "#{TENANT_NAME}#"
+
+# Service Specific Values
+referenceApplication:
+  serviceName: "c3simple"
+  image: "#{AWS_ACCOUNT_ID}#.dkr.ecr.#{AWS_REGION}#.amazonaws.com/c3simple"
+  serviceType: "NodePort"
+  servicePort: 80
+  containerPort: 5000

@@ -1,0 +1,27 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Values.tenant }}-hpa
+  namespace: {{ .Values.tenant }}
+  labels:
+    app.kubernetes.io/name: "{{ .Values.tenant }}-hpa"
+    app.kubernetes.io/instance:  "{{ .Values.tenant }}"
+    app.kubernetes.io/version: "{{ .Values.version }}"
+    app.kubernetes.io/component: "{{ .Values.referenceApplication.serviceName }}" 
+    app.kubernetes.io/part-of: "{{ .Values.tenant }}"
+    app.kubernetes.io/managed-by: "helm"
+    app.kubernetes.io/created-by: "helm"
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ .Values.referenceApplication.serviceName }}-deployment
+  minReplicas: {{ .Values.replicas }}
+  maxReplicas: 30
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 10

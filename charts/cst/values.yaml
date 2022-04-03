@@ -1,0 +1,22 @@
+
+# Release-wide Values
+replicas: "2"
+version: "#{TAG}#"
+account: "#{AWS_ACCOUNT_ID}#"        
+region: "#{AWS_REGION}#"             
+stack: "#{STACK_NAME}#"             
+cluster: "#{EKS_CLUSTER_NAME}#"     
+tenant: "#{TENANT_NAME}#"
+host: "#{ENVIRONMENT_NAME}#-#{TENANT_NAME}#-c3simple-#{STACK_NAME}#.csqrlabs.cloud"
+gateway: "gateway-#{STACK_NAME}#.csqrlabs.cloud"
+enableGateway: "#{ENABLE_GATEWAY}#"
+
+# Service Specific Values
+referenceApplication:
+  serviceName: "c3simple"
+  image: "#{AWS_ACCOUNT_ID}#.dkr.ecr.#{AWS_REGION}#.amazonaws.com/c3simple"
+  serviceType: "NodePort"
+  servicePort: 80
+  containerPort: 5000
+  healthCheckPath: "/swagger/index.html"
+  healthCheckInterval: 120

@@ -1,0 +1,10 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: "#{TENANT_NAME}#"
+  labels:
+    app.kubernetes.io/name: "#{TENANT_NAME}#"
+    app.kubernetes.io/instance:  "#{TENANT_NAME}#"
+    app.kubernetes.io/part-of: "#{TENANT_NAME}#"
+    app.kubernetes.io/managed-by: "c3-pipeline"
+    app.kubernetes.io/created-by: "c3-pipeline"
