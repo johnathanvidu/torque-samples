@@ -3,8 +3,8 @@ description: description text
 
 inputs:
   some-name:
-    type: string/numeric/boolean
-    display-style: normal/multiline
+    type: string
+    display-style: normal
     default: "abc"
     description: "description"
 
@@ -19,7 +19,7 @@ grains:
       source: 
         store: on-borded-repo/registry-name
         path: /app1/
-      host: compute-service-name
+      host: aws
       inputs:
         - input_name: .inputs.some-name
       ouputs:
@@ -31,6 +31,6 @@ grains:
     spec:
       source: 
         path: https://github.com/example/app1/
-      host: compute-service-name
+      host: aws
       inputs:
         - someInput: .grains.app1.outputs.output-name
