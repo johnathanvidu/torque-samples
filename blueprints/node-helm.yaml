@@ -10,7 +10,7 @@ grains:
       host:
         cloud-account: aws
         compute-service: eks
-        region: eu-west-1
+        #region: eu-west-1
       commands:
         - dep up bitnami/node
     
