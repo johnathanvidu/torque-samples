@@ -1,0 +1,72 @@
+spec_version: 2-preview
+description: Ruby on Rails application running on EKS cluster, using AWS Elasticache and AWS RDS (PostgreSQL)
+
+inputs:
+  eks_vpc:
+    type: string
+    display-style: normal
+    default: vpc-xxxxxxxxxxxx
+    description: AWS ElastiCache should be deployed in the same VPC of the EKS nodes
+  db_name:
+    type: string
+    display-style: normal
+    default: demo_db
+    description: "database name"    
+  username:
+    type: string
+    display-style: normal
+    default: root
+    description: "user name"    
+  password:
+    type: string
+    display-style: masked
+    default: Torque!123
+    description: "please set the root database password"    
+
+
+# values that starts with '{' for liquid template must be encosed with quotes so YAML won't consider them as dict
+outputs:
+  output1:
+    value: '{{sandboxId}}'
+  output2:
+    value: '{{.inputs.input1}}'
+  output3:
+    value: '{{.grains.helloTF.outputs.output1}}'
+    
+
+grains:
+  elasticache-postgres:
+    kind: terraform
+    spec:
+      source:
+        path: https://github.com/QualiTorque/samples/terraform/terraform-utils/elasticache-postgres-modules
+      host:
+        cloud-account: aws
+        compute-service: eks
+      inputs:
+        - sandbox_id: {{sandboxId}}
+        - eks_vpc: {{.inputs.eks_vpc}}
+        - db_name: {{.inputs.db_name}}
+        - username: {{.inputs.username}}
+        - password: {{.inputs.password}}
+      # ouputs:
+      #   - output1
+      #   - output2
+
+
+
+  # ror-app:
+  #   kind: helm
+  #   depends-on: elasticache-postgres
+  #   spec:
+  #     source:
+  #       path: https://github.com/bitnami/charts.git//bitnami/node
+  #     host:
+  #       cloud-account: aws
+  #       compute-service: eks
+  #     commands:
+  #       - "dep up bitnami/node"
+
+  #     inputs:
+  #       #- nameOverride: '{{.inputs.input1}}'
+  #       - nameOverride: '{{.grains.helloTF.outputs.output1}}'
