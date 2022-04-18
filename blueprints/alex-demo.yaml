@@ -46,7 +46,7 @@ grains:
     kind: terraform
     spec:
       source:
-        path: path: https://github.com/QualiSystemsLab/terraform-modules.git//rds
+        path: https://github.com/QualiSystemsLab/terraform-modules.git//rds
       host:
         cloud-account: '{{.inputs.account}}'
         compute-service: '{{.inputs.compute}}'
