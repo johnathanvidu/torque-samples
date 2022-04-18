@@ -46,8 +46,7 @@ grains:
     kind: terraform
     spec:
       source:
-        store: Terraform-Assets
-        path: rds
+        path: path: https://github.com/QualiSystemsLab/terraform-modules.git//rds
       host:
         cloud-account: '{{.inputs.account}}'
         compute-service: '{{.inputs.compute}}'
@@ -69,8 +68,7 @@ grains:
     kind: terraform
     spec: 
       source:
-        store: Terraform-Assets
-        path: s3
+        path: https://github.com/QualiSystemsLab/terraform-modules.git//s3
       host:
         cloud-account: '{{.inputs.account}}'
         compute-service: '{{.inputs.compute}}'
@@ -84,8 +82,7 @@ grains:
     depends-on: mySqlDB, s3Bucket
     spec:
       source:
-        store: Project-Pivot-Assets
-        path: robotShop
+        path: https://github.com/QualiSystemsLab/Torque-Project-Pivot.git//robotShop
       host:
         cloud-account: '{{.inputs.account}}'
         compute-service: '{{.inputs.compute}}'
