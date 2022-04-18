@@ -45,7 +45,7 @@ grains:
         path: terraform/simple-tf-module
       host:
         cloud-account: '{{.inputs.account}}'
-        compute-service:'{{.inputs.compute}}'
+        compute-service: '{{.inputs.compute}}'
       inputs:
         - test_input1: env-input-{{.inputs.input1}}
         - test_input2: env-id-{{sandboxId}}
