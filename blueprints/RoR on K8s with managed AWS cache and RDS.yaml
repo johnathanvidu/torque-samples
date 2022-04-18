@@ -44,11 +44,11 @@ grains:
         cloud-account: aws
         compute-service: eks
       inputs:
-        - sandbox_id: {{sandboxId}}
-        - eks_vpc: {{.inputs.eks_vpc}}
-        - db_name: {{.inputs.db_name}}
-        - username: {{.inputs.username}}
-        - password: {{.inputs.password}}
+        - sandbox_id: '{{ sandboxid | downcase }}'
+        - eks_vpc: '{{.inputs.eks_vpc}}'
+        - db_name: '{{.inputs.db_name}}'
+        - username: '{{.inputs.username}}'
+        - password: '{{.inputs.password}}'
       # ouputs:
       #   - output1
       #   - output2
