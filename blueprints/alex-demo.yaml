@@ -3,6 +3,16 @@ description: Robotshot microservices application deployed on K8S with Helm and R
 
 
 inputs:
+  account:
+    type: string
+    display-style: normal
+    default: "aws"
+    description: "cloud account"
+  compute:
+    type: string
+    display-style: normal
+    default: "eks"
+    description: "compute service"    
   version:
     type: string
     display-style: normal
@@ -39,8 +49,8 @@ grains:
         store: Terraform-Assets
         path: rds
       host:
-        cloud-account: aws-presales
-        compute-service: eks-demo
+        cloud-account: '{{.inputs.account}}'
+        compute-service: '{{.inputs.compute}}'
       inputs:
         - sandbox_id: '{{ sandboxid | downcase }}'
         - size: '{{ .inputs.db_size }}' 
@@ -62,8 +72,8 @@ grains:
         store: Terraform-Assets
         path: s3
       host:
-        cloud-account: aws-presales
-        compute-service: eks-demo
+        cloud-account: '{{.inputs.account}}'
+        compute-service: '{{.inputs.compute}}'
       inputs:
         - region: us-east-1
         - acl: private
@@ -77,8 +87,8 @@ grains:
         store: Project-Pivot-Assets
         path: robotShop
       host:
-        cloud-account: aws-presales
-        compute-service: eks-demo
+        cloud-account: '{{.inputs.account}}'
+        compute-service: '{{.inputs.compute}}'
       # commands:
       #   - "dep up xxx"
 
