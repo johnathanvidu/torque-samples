@@ -6,7 +6,7 @@ grains:
     kind: terraform
     spec:
       source:
-        path: https://github.com/QualiTorque/samples.git//terraform/eks-rds
+        path: github.com/QualiTorque/samples.git//terraform/eks-rds
       host:
         cloud-account: aws
         compute-service: eks
