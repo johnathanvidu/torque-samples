@@ -6,7 +6,7 @@ grains:
     kind: terraform
     spec:
       source:
-        path: https://github.com/johnathanvidu/torque-samples.git//terraform/simple-tf-module
+        path: github.com/johnathanvidu/torque-samples.git//terraform/simple-tf-module
       host:
         cloud-account: aws
         compute-service: eks
