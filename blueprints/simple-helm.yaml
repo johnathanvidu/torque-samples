@@ -13,7 +13,8 @@ inputs:
     default: "eks"
     description: "compute service"     
  
- node:
+ grains:
+   node:
     kind: helm
     spec:
       source:
