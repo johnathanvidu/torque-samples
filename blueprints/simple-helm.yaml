@@ -1,0 +1,25 @@
+spec_version: 2-preview
+description: something
+
+inputs:
+  account:
+    type: string
+    display-style: normal
+    default: "aws"
+    description: "cloud account"
+  compute:
+    type: string
+    display-style: normal
+    default: "eks"
+    description: "compute service"     
+ 
+ node:
+    kind: helm
+    spec:
+      source:
+        path: https://github.com/bitnami/charts.git//bitnami/node
+      host:
+        cloud-account: aws
+        compute-service: eks
+      commands:
+        - "dep up bitnami/node"
