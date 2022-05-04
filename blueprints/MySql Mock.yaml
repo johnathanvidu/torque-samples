@@ -1,0 +1,12 @@
+spec_version: 2-preview
+description: Auto generated blueprint for MySql terraform module   
+
+grains:
+  MySqlDB:
+    kind: terraform
+    spec:
+      source:
+        path: github.com/QualiTorque/samples.git//terraform/eks-rds
+      host:
+        cloud-account: aws-demo
+        compute-service: eks-demo
