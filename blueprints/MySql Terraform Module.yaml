@@ -1,6 +1,13 @@
 spec_version: 2-preview
 description: Auto generated blueprint for MySql terraform module   
 
+inputs:
+  magnificent:
+    type: string
+    display-style: normal
+    default: "yeah!"
+    description: "magnificent input"
+
 grains:
   MySqlDB:
     kind: terraform
