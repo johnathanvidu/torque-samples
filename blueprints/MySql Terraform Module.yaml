@@ -17,3 +17,5 @@ grains:
       host:
         cloud-account: aws
         compute-service: eks
+      inputs:
+        - ilikemyinput: {{ .inputs.magnificent }}
