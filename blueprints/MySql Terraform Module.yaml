@@ -18,4 +18,4 @@ grains:
         cloud-account: aws
         compute-service: eks
       inputs:
-        - ilikemyinput: {{ .inputs.magnificent }}
+        - ilikemyinput: '{{ .inputs.magnificent }}'
